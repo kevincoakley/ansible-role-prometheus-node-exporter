@@ -1,1 +1,9 @@
-localhost
+[all:vars]
+ansible_connection=ssh
+ansible_user=root
+ansible_ssh_pass=docker
+ansible_host=127.0.0.1
+
+[node-exporter]
+ubuntu-system ansible_ssh_host=127.0.0.1 ansible_port=2200
+centos-system ansible_ssh_host=127.0.0.1 ansible_port=2222

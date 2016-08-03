@@ -1,0 +1,20 @@
+---
+docker_containers:
+  - name: ubuntu-system
+    image: kevincoakley/ubuntu16.04-systemd
+    expose:
+      - "9100"
+    ports:
+      - "2200:22"
+      - "9101:9100"
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup"
+  - name: centos-system
+    image: kevincoakley/centos7-systemd
+    expose:
+      - "9100"
+    ports:
+      - "2222:22"
+      - "9102:9100"
+    volumes:
+      - "/sys/fs/cgroup:/sys/fs/cgroup"

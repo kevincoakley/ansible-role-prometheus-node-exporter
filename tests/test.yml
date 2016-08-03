@@ -1,5 +1,47 @@
 ---
-- hosts: localhost
-  remote_user: root
+- name: Start the Docker containers
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - docker_containers.yml
+
+  vars:
+    - container_state: reloaded
+    - container_privileged: true
+
+  roles:
+    - docker
+
+  tags:
+    - docker-start
+
+
+- name: Test the Prometheus Node Exporter role for CentOS and Ubuntu systems
+  hosts: node-exporter
+  become: yes
+  become_method: sudo
+
   roles:
     - ansible-role-prometheus-node-exporter
+    #- node-exporter-test
+
+  tags:
+    - node-exporter
+
+
+- name: Stop the Docker containers
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - docker_containers.yml
+
+  vars:
+    - container_state: absent
+
+  roles:
+    - docker
+
+  tags:
+    - docker-stop

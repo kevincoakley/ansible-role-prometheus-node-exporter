@@ -1,0 +1,4 @@
+---
+prometheus_node_exporter_gmond_packages:
+  - ganglia-monitor
+prometheus_node_exporter_gmond_service_name: ganglia-monitor

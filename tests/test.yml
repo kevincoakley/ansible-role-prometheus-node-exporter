@@ -22,6 +22,11 @@
   become: yes
   become_method: sudo
 
+  vars:
+    prometheus_node_exporter_enabled_collectors:
+      - gmond
+      - loadavg
+
   roles:
     - ansible-role-prometheus-node-exporter
     #- node-exporter-test

@@ -29,7 +29,7 @@
 
   roles:
     - ansible-role-prometheus-node-exporter
-    #- node-exporter-test
+    - node-exporter-test
 
   tags:
     - node-exporter

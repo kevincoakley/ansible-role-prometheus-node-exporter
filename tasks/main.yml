@@ -52,6 +52,18 @@
   when:
     - "'gmond' in prometheus_node_exporter_enabled_collectors"
 
+- name: Copy the gmond.conf file if the prometheus_gmond_conf variable has a value
+  copy:
+    src: "{{ prometheus_gmond_conf_path | default(omit) }}"
+    dest: /etc/ganglia/gmond.conf
+    owner: root
+    group: root
+    mode: 0755
+  when:
+    - not ( (prometheus_gmond_conf_path is undefined) or (prometheus_gmond_conf_path is none) or (prometheus_gmond_conf_path | trim == '') )
+    - "'gmond' in prometheus_node_exporter_enabled_collectors"
+  notify: restart gmond
+
 #
 # Install Prometheus Node Exporter
 #

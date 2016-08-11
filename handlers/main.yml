@@ -2,6 +2,11 @@
 - name: reload systemd
   command: systemctl daemon-reload
 
+- name: restart gmond
+  service:
+    name: "{{ prometheus_node_exporter_gmond_service_name }}"
+    state: restarted
+
 - name: restart node_exporter
   service:
     name: node_exporter

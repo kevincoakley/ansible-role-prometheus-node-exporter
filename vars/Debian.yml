@@ -1,4 +1,5 @@
 ---
 prometheus_node_exporter_gmond_packages:
   - ganglia-monitor
+  - ganglia-monitor-python
 prometheus_node_exporter_gmond_service_name: ganglia-monitor

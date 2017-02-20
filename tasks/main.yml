@@ -16,55 +16,6 @@
     shell: /bin/bash
 
 #
-# Install Ganglia Gmond if it is in prometheus_node_exporter_enabled_collectors
-#
-- name: Download and install epel before installing the required packages (yum)
-  yum:
-    name: epel-release
-    state: present
-  when:
-    - ansible_os_family == "RedHat"
-    - "'gmond' in prometheus_node_exporter_enabled_collectors"
-
-- name: Download and install the required packages (yum)
-  yum:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ prometheus_node_exporter_gmond_packages }}"
-  when:
-    - ansible_os_family == "RedHat"
-    - "'gmond' in prometheus_node_exporter_enabled_collectors"
-
-- name: Download and install the required packages (apt)
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ prometheus_node_exporter_gmond_packages }}"
-  when:
-    - ansible_os_family == "Debian"
-    - "'gmond' in prometheus_node_exporter_enabled_collectors"
-
-- name: Ensure Ganglia Gmond is started and enabled on boot
-  service:
-    name: "{{ prometheus_node_exporter_gmond_service_name }}"
-    state: started
-    enabled: yes
-  when:
-    - "'gmond' in prometheus_node_exporter_enabled_collectors"
-
-- name: Copy the gmond.conf file if the prometheus_gmond_conf variable has a value
-  copy:
-    src: "{{ prometheus_gmond_conf_path | default(omit) }}"
-    dest: /etc/ganglia/gmond.conf
-    owner: root
-    group: root
-    mode: 0755
-  when:
-    - not ( (prometheus_gmond_conf_path is undefined) or (prometheus_gmond_conf_path is none) or (prometheus_gmond_conf_path | trim == '') )
-    - "'gmond' in prometheus_node_exporter_enabled_collectors"
-  notify: restart gmond
-
-#
 # Install Prometheus Node Exporter
 #
 - name: Check if the version of Node Exporter already exists

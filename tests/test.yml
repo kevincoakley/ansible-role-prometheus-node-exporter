@@ -7,7 +7,7 @@
     - docker_containers.yml
 
   vars:
-    - container_state: reloaded
+    - container_state: started
     - container_privileged: true
 
   roles:
@@ -24,7 +24,6 @@
 
   vars:
     prometheus_node_exporter_enabled_collectors:
-      - gmond
       - loadavg
 
   roles:

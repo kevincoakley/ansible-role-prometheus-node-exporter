@@ -1,5 +1,0 @@
----
-prometheus_node_exporter_gmond_packages:
-  - ganglia-gmond
-  - ganglia-gmond-python
-prometheus_node_exporter_gmond_service_name: gmond

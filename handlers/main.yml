@@ -1,8 +1,10 @@
 ---
 - name: reload systemd
-  command: systemctl daemon-reload
+  systemd:
+    name: systemd
+    daemon_reload: yes
 
 - name: restart node_exporter
-  service:
+  systemd:
     name: node_exporter
     state: restarted

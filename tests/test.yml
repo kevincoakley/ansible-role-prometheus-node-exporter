@@ -24,7 +24,9 @@
 
   vars:
     prometheus_node_exporter_enabled_collectors:
-      - loadavg
+      - logind
+    prometheus_node_exporter_disabled_collectors:
+      - netstat
 
   roles:
     - ansible-role-prometheus-node-exporter

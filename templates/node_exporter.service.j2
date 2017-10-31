@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User={{ prometheus_node_exporter_service_username }}
 Group={{ prometheus_node_exporter_service_group }}
-ExecStart=/opt/node_exporter/node_exporter -collectors.enabled {{ prometheus_node_exporter_enabled_collectors | join(',') }} {% for flag, flag_value in prometheus_node_exporter_config_flags.iteritems() %}-{{ flag }}={{ flag_value }} {% endfor %}
+ExecStart=/opt/node_exporter/node_exporter {% for enabled in prometheus_node_exporter_enabled_collectors %}--collector.{{ enabled }} {% endfor %} {% for disabled in prometheus_node_exporter_disabled_collectors %}--no-collector.{{ disabled }} {% endfor %} {% for flag, flag_value in prometheus_node_exporter_config_flags.items() %}--{{ flag }}={{ flag_value }} {% endfor %}
 
 SyslogIdentifier=prometheus_node_exporter
 Restart=always

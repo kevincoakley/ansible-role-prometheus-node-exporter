@@ -3,7 +3,9 @@ ansible-role-prometheus-node-exporter
 
 [![Build Status](https://travis-ci.org/kevincoakley/ansible-role-prometheus-node-exporter.svg?branch=master)](https://travis-ci.org/kevincoakley/ansible-role-prometheus-node-exporter)
 
-Install Prometheus Node Exporter and Ganglia Gmond (if necessary) - https://github.com/prometheus/node_exporter . Tested with CentOS 7 and Ubuntu 16.04
+Install Prometheus Node Exporter - https://github.com/prometheus/node_exporter . Tested with CentOS 7 and Ubuntu 16.04
+
+Use role release >= 0.15.0 on node_exporter versions >= 0.15.0. Use role release <= 0.14.0 on node_exporter versions <= 0.14.0
 
 Requirements
 ------------
@@ -13,12 +15,12 @@ None
 Role Variables
 --------------
 
-See defaults/main.yml. This role supports all collectors, just list the collectors using the prometheus_node_exporter_enabled_collectors variable. If the gmond collector is selected then Ganglia Gmond will be installed and started as a system service.
+See defaults/main.yml. This role supports all collectors, just list the collectors using the prometheus_node_exporter_enabled_collectors variable.
 
 Dependencies
 ------------
 
-Node
+None
 
 Example Playbook
 ----------------
@@ -30,8 +32,9 @@ Example Playbook
 
       vars:
         prometheus_node_exporter_enabled_collectors:
-          - gmond
-          - loadavg
+          - logind
+        prometheus_node_exporter_disabled_collectors:
+          - netstat
 
       roles:
         - ansible-role-prometheus-node-exporter

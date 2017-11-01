@@ -5,8 +5,7 @@ ansible-role-prometheus-node-exporter
 
 Install Prometheus Node Exporter - https://github.com/prometheus/node_exporter . Tested with CentOS 7 and Ubuntu 16.04
 
-Use role release >= 0.15.0 on node_exporter versions >= 0.15.0
-Use role release <= 0.14.0 on node_exporter versions <= 0.14.0
+Use role release >= 0.15.0 on node_exporter versions >= 0.15.0. Use role release <= 0.14.0 on node_exporter versions <= 0.14.0
 
 Requirements
 ------------

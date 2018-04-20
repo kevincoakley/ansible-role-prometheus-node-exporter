@@ -11,6 +11,7 @@
     groups: "{{ prometheus_node_exporter_service_group }}"
     append: yes
     shell: /bin/bash
+  when: prometheus_node_exporter_service_username != 'root'
 
 #
 # Install Prometheus Node Exporter

@@ -3,13 +3,13 @@
   group:
     name: "{{ prometheus_node_exporter_service_group }}"
     state: present
-    system: yes
+    system: true
 
 - name: Create the Node Exporter user
   user:
     name: "{{ prometheus_node_exporter_service_username }}"
     groups: "{{ prometheus_node_exporter_service_group }}"
-    append: yes
+    append: true
     shell: /bin/bash
   when: prometheus_node_exporter_manage_user
 
@@ -31,7 +31,7 @@
   unarchive:
     src: "/tmp/node_exporter-{{ prometheus_node_exporter_version }}.tar.gz"
     dest: "/opt/"
-    copy: no
+    copy: false
     owner: "{{ prometheus_node_exporter_service_username }}"
     group: "{{ prometheus_node_exporter_service_group }}"
   when: not prometheus_node_exporter_install_path.stat.exists
@@ -60,4 +60,4 @@
   service:
     name: node_exporter
     state: started
-    enabled: yes
+    enabled: true

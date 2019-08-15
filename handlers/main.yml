@@ -2,7 +2,7 @@
 - name: reload systemd
   systemd:
     name: systemd
-    daemon_reload: yes
+    daemon_reload: true
 
 - name: restart node_exporter
   systemd:

@@ -1,7 +1,7 @@
 ---
 prometheus_node_exporter_version: 0.18.1
 prometheus_node_exporter_download_url: https://github.com/prometheus/node_exporter/releases/download/v{{ prometheus_node_exporter_version }}/node_exporter-{{ prometheus_node_exporter_version }}.linux-amd64.tar.gz
-prometheus_node_exporter_manage_user: True
+prometheus_node_exporter_manage_user: true
 prometheus_node_exporter_service_username: node-exp
 prometheus_node_exporter_service_group: node-exp
 

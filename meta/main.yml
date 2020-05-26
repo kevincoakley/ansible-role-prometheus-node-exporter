@@ -10,10 +10,11 @@ galaxy_info:
     - name: EL
       versions:
         - 7
+        - 8
     - name: Ubuntu
       versions:
-        - xenial
         - bionic
+        - focal
   #
   # Below are all categories currently available. Just as with
   # the platforms above, uncomment those that apply to your role.

@@ -1,0 +1,13 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  vars:
+    prometheus_node_exporter_enabled_collectors:
+      - logind
+    prometheus_node_exporter_disabled_collectors:
+      - netstat
+
+  roles:
+    - role: ansible-role-prometheus-node-exporter

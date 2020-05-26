@@ -1,0 +1,10 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Verify that the Node Exporter is running on port 9100
+      uri:
+        url: http://127.0.0.1:9100
+        status_code: 200

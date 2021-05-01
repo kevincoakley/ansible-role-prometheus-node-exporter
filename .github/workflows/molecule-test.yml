@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      max-parallel: 4
       matrix:
         molecule_distro: ['centos7', 'centos8', 'ubuntu1804', 'ubuntu2004']
     env:
@@ -20,7 +21,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ansible-lint flake8 molecule docker
+          pip install ansible ansible-lint flake8 molecule molecule-docker docker yamllint
+          ansible --version
+          ansible-lint --version
+          molecule --version
       - name: Test with molecule
         run: |
           molecule test --all

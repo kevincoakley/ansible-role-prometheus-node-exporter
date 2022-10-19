@@ -4,7 +4,7 @@ ansible-role-prometheus-node-exporter
 ![](https://github.com/kevincoakley/ansible-role-prometheus-node-exporter/workflows/Molecule%20Test/badge.svg)
 
 
-Install Prometheus Node Exporter - https://github.com/prometheus/node_exporter . Tested with CentOS 7, CentOS 8, Ubuntu 18.04 and Ubuntu 20.04
+Install Prometheus Node Exporter - https://github.com/prometheus/node_exporter . Tested with EL 7, EL 8, EL 9, Ubuntu 18.04, Ubuntu 20.04, and Ubuntu 22.04.
 
 Requirements
 ------------

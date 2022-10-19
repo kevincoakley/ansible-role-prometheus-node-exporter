@@ -1,12 +1,12 @@
 ---
 - name: Create the Node Exporter group
-  group:
+  ansible.builtin.group:
     name: "{{ prometheus_node_exporter_service_group }}"
     state: present
     system: true
 
 - name: Create the Node Exporter user
-  user:
+  ansible.builtin.user:
     name: "{{ prometheus_node_exporter_service_username }}"
     groups: "{{ prometheus_node_exporter_service_group }}"
     append: true
@@ -17,18 +17,19 @@
 # Install Prometheus Node Exporter
 #
 - name: Check if the version of Node Exporter already exists
-  stat:
+  ansible.builtin.stat:
     path: "/opt/node_exporter-{{ prometheus_node_exporter_version }}.linux-amd64"
   register: prometheus_node_exporter_install_path
 
 - name: Download Node Exporter
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ prometheus_node_exporter_download_url }}"
     dest: "/tmp/node_exporter-{{ prometheus_node_exporter_version }}.tar.gz"
+    mode: '0440'
   when: not prometheus_node_exporter_install_path.stat.exists
 
 - name: Extract Node Exporter into the install directory
-  unarchive:
+  ansible.builtin.unarchive:
     src: "/tmp/node_exporter-{{ prometheus_node_exporter_version }}.tar.gz"
     dest: "/opt/"
     copy: false
@@ -37,7 +38,7 @@
   when: not prometheus_node_exporter_install_path.stat.exists
 
 - name: Create a symlink for /opt/node_exporter
-  file:
+  ansible.builtin.file:
     src: "/opt/node_exporter-{{ prometheus_node_exporter_version }}.linux-amd64"
     dest: /opt/node_exporter
     owner: "{{ prometheus_node_exporter_service_username }}"
@@ -46,18 +47,18 @@
   when: not prometheus_node_exporter_install_path.stat.exists
 
 - name: Copy the Node Exporter systemd service file
-  template:
+  ansible.builtin.template:
     src: node_exporter.service.j2
     dest: /etc/systemd/system/node_exporter.service
     owner: root
     group: root
     mode: 0644
   notify:
-    - reload systemd
-    - restart node_exporter
+    - Reload systemd
+    - Restart node_exporter
 
 - name: Ensure Node Exporter is started and enabled on boot
-  service:
+  ansible.builtin.service:
     name: node_exporter
     state: started
     enabled: true

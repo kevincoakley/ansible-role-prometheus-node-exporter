@@ -1,6 +1,3 @@
 ---
-warn_list:
-  - internal-error
-  - role-name
 skip_list:
   - yaml
